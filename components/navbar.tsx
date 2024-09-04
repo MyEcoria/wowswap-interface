@@ -49,15 +49,15 @@ export const Navbar = () => {
   );
 
   return (
-    <NextUINavbar maxWidth="xl" position="sticky">
+    <NextUINavbar maxWidth="xl" position="sticky" isBordered>
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
-            <Logo />
-            <p className="font-bold text-inherit">ACME</p>
+            <img src="/logo.png" width="40px"/>
+            <p className="font-bold text-inherit">WOWSWAP</p>
           </NextLink>
         </NavbarBrand>
-        <ul className="hidden lg:flex gap-4 justify-start ml-2">
+        {/* <ul className="hidden lg:flex gap-4 justify-start ml-2">
           {siteConfig.navItems.map((item) => (
             <NavbarItem key={item.href}>
               <NextLink
@@ -72,10 +72,10 @@ export const Navbar = () => {
               </NextLink>
             </NavbarItem>
           ))}
-        </ul>
+        </ul> */}
       </NavbarContent>
 
-      <NavbarContent
+      {/* <NavbarContent
         className="hidden sm:flex basis-1/5 sm:basis-full"
         justify="end"
       >
@@ -135,7 +135,7 @@ export const Navbar = () => {
             </NavbarMenuItem>
           ))}
         </div>
-      </NavbarMenu>
+      </NavbarMenu> */}
     </NextUINavbar>
   );
 };
