@@ -1,0 +1,20 @@
+.ant-input-number-input{
+    font-size: 18px;
+    font-weight: 500;
+    text-align: right !important;
+    padding-right: 10px;
+}
+.al .ant-input-number-input{
+    text-align: left !important;
+    font-size: unset;
+    font-weight: unset;
+    
+}
+.ant-select-selection-item{
+    font-weight: 500;
+    font-size: 16px;
+}
+.ant-input-number-lg{
+    border-top-right-radius: 8px ; 
+    border-bottom-right-radius: 8px ;
+}

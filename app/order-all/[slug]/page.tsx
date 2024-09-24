@@ -34,6 +34,7 @@ export default function Page({ params }: { params: { slug: string } }) {
       "nano_3ktmq6dpwcc694hrnjzfdykbqeuj4w5w8nut3uqm5pgwa4m9jmstoc4ntu6p",
     payinHash: "nop",
     payoutHash: "nop",
+    extraId: null
   });
   const [requetStat, setRequetStat] = React.useState(false);
   const [status, setStatus] = React.useState(0);
@@ -43,7 +44,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     // Définir l'intervalle pour actualiser toutes les 10 secondes
     const reqInfo = () => {
       axios
-        .get(`https://api.wowswap.uk/get-order?id=${data}`)
+        .get(`https://api.wowswap.uk/get-order-all?id=${data}`)
         .then((response) => {
           if (response.data && response.data.id) {
             console.log(response.data.status);
@@ -86,7 +87,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     {
       key: "1",
       label: "Amount to send",
-      children: <p>{swapInfo.fromAmount.toFixed(4)}</p>,
+      children: <p>{swapInfo.fromAmount.toFixed(7)}</p>,
     },
     {
       key: "2",
@@ -105,6 +106,39 @@ export default function Page({ params }: { params: { slug: string } }) {
     },
     {
       key: "4",
+      label: "Destination address",
+      children: <p>{swapInfo.payoutAddress}</p>,
+    },
+  ];
+
+  const itemsExtraId = [
+    {
+      key: "1",
+      label: "Amount to send",
+      children: <p>{swapInfo.fromAmount.toFixed(7)}</p>,
+    },
+    {
+      key: "2",
+      label: "Send to address",
+      children: <p>{swapInfo.payinAddress}</p>,
+    },
+    {
+      key: "3",
+      label: "Extra id/memo",
+      children: <p>{swapInfo.extraId ? swapInfo.extraId : null}</p>,
+    },
+    {
+      key: "4",
+      label: "Estimated price",
+      children: (
+        <p>
+          1 {swapInfo.from} ≈{" "}
+          {(swapInfo.toAmount / swapInfo.fromAmount).toFixed(4)} {swapInfo.to}
+        </p>
+      ),
+    },
+    {
+      key: "5",
       label: "Destination address",
       children: <p>{swapInfo.payoutAddress}</p>,
     },
@@ -138,9 +172,9 @@ export default function Page({ params }: { params: { slug: string } }) {
         <p>
           <Link
             href={
-              swapInfo.to == "XNO"
-                ? `https://nanexplorer.com/nano/block/${swapInfo.payoutHash}`
-                : `https://explorer.suchwow.xyz/tx/${swapInfo.payoutHash}`
+              swapInfo.to !== "XNO" && swapInfo.to !== "WOW" && swapInfo.to !== "BAN" && swapInfo.to !== "ANA" && swapInfo.to !== "XRO" && swapInfo.to !== "XDG"
+                ? swapInfo.payoutHash
+                : swapInfo.to == "XNO" || swapInfo.to == "BAN" || swapInfo.to == "ANA" || swapInfo.to == "XRO" || swapInfo.to == "XDG" ? `https://nanexplorer.com/all/block/${swapInfo.payoutHash}` : `https://explorer.suchwow.xyz/tx/${swapInfo.payoutHash}`
             }
           >
             {swapInfo.payoutHash}
@@ -201,17 +235,29 @@ export default function Page({ params }: { params: { slug: string } }) {
                           labelStyle={{ fontWeight: "bold" }}
                           contentStyle={{ whiteSpace: "pre-wrap" }} // Préserve les retours à la ligne
                         >
-                          {items.map((item) => (
+                          { swapInfo.extraId !== null && swapInfo.extraId !== false ? (
+                            itemsExtraId.map((item) => (
+                              <Descriptions.Item
+                                key={item.key}
+                                label={item.label}
+                              >
+                                {item.children}
+                              </Descriptions.Item>
+                            ))
+                        ) : (
+                          items.map((item) => (
                             <Descriptions.Item
                               key={item.key}
                               label={item.label}
                             >
                               {item.children}
                             </Descriptions.Item>
-                          ))}
+                          ))
+                        )}
                         </Descriptions>
                       </Col>
                       <Col span={12} className="pl-5">
+                      { swapInfo.from.toUpperCase() == "XNO" || swapInfo.from.toUpperCase() == "WOW" ? (
                         <Card className="max-w-[90%]">
                           <CardHeader>
                             <h2 className="pl-[40%] font-bold text-1xl">
@@ -220,7 +266,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                           </CardHeader>
                           <Divider />
                           <CardBody>
-                            {swapInfo.from == "XNO" ? (
+                          {swapInfo.from.toUpperCase() === "XNO" ? (
                               <div className="flex justify-center gap-4">
                                 <Link
                                   href={`nano:${swapInfo.payinAddress}?amount=${new BigNumber(swapInfo.fromAmount).multipliedBy(new BigNumber(10).pow(30)).toFixed()}`}
@@ -248,6 +294,9 @@ export default function Page({ params }: { params: { slug: string } }) {
                             )}
                           </CardBody>
                         </Card>
+                      ) : (
+                        null
+                      )}
                         <div className="pt-5">
                           <Card className="max-w-[90%]">
                             <CardHeader>
