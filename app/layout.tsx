@@ -40,9 +40,6 @@ export default function RootLayout({
           "min-h-screen font-sans antialiased",
           fontSans.variable,
         )}
-        // style={{
-        //   backgroundColor: "#062763"
-        // }}
       >
         <Providers>
           <div className="relative flex flex-col h-screen">
@@ -54,8 +51,8 @@ export default function RootLayout({
               <Link
                 isExternal
                 className="flex items-center gap-1 text-current"
-                href="https://nextui-docs-v2.vercel.app?utm_source=next-app-template"
-                title="nextui.org homepage"
+                href="https://wowswap.uk"
+                title="WowSwap"
               >
                 <span className="text-default-600">WowSwap © 2024</span>
               </Link>

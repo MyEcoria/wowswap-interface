@@ -1,53 +1,27 @@
-# Next.js & NextUI Template
+# WowSwap
+WowSwap is a cryptocurrency exchange platform that allows users to swap various cryptocurrencies without the need for sign-up, limits, or complications.
 
-This is a template for creating applications using Next.js 14 (app directory) and NextUI (v2).
+This repository contains the frontend interface of WowSwap. For the backend, please visit the [WowSwap Backend Repository](https://github.com/MyEcoria/wowswap).
 
-[Try it on CodeSandbox](https://githubbox.com/nextui-org/next-app-template)
+## Features
 
-## Technologies Used
+- **Crypto Exchange**: Swap cryptocurrencies easily.
+- **Theme Switch**: Toggle between light and dark modes.
+- **Responsive Design**: Optimized for both desktop and mobile devices.
+- **Wallet Integration**: Pay with popular wallets like Natrium and Cake Wallet.
+- **QR Code Payment**: Pay using QR codes for convenience.
+- **Real-time Updates**: Get real-time updates on swap status.
 
-- [Next.js 14](https://nextjs.org/docs/getting-started)
-- [NextUI v2](https://nextui.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [next-themes](https://github.com/pacocoursey/next-themes)
+## Installation
 
-## How to Use
-
-### Use the template with create-next-app
-
-To create a new project based on this template using `create-next-app`, run the following command:
-
+To get started with WowSwap, clone the repository and install the dependencies:
 ```bash
-npx create-next-app -e https://github.com/nextui-org/next-app-template
-```
-
-### Install dependencies
-
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
-
-```bash
+git clone https://github.com/yourusername/wowswap-interface.git
+cd wowswap-interface
 npm install
-```
-
-### Run the development server
-
-```bash
+# For testing
 npm run dev
+# For production
+npm run build
+npm run start
 ```
-
-### Setup pnpm (optional)
-
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
-
-```bash
-public-hoist-pattern[]=*@nextui-org/*
-```
-
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
-
-## License
-
-Licensed under the [MIT license](https://github.com/nextui-org/next-app-template/blob/main/LICENSE).

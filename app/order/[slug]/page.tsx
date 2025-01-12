@@ -40,7 +40,6 @@ export default function Page({ params }: { params: { slug: string } }) {
   const [statusStep, setStatusStep] = React.useState("process");
 
   useEffect(() => {
-    // Définir l'intervalle pour actualiser toutes les 10 secondes
     const reqInfo = () => {
       axios
         .get(`https://api.wowswap.uk/get-order?id=${data}`)
@@ -49,7 +48,6 @@ export default function Page({ params }: { params: { slug: string } }) {
             console.log(response.data.status);
             setSwapInfo(response.data);
 
-            // Mettre à jour le statut en fonction de la réponse
             if (response.data.status === "pending") {
               setStatus(0);
             } else if (
@@ -71,14 +69,13 @@ export default function Page({ params }: { params: { slug: string } }) {
         .catch((error) => {
           console.error("Error fetching data:", error);
         });
-    } // 10000 millisecondes = 10 secondes
+    }
 
 	reqInfo();
 	const interval = setInterval(() => {
 		reqInfo();
-	  }, 10000); // 10000 millisecondes = 10 secondes
+	  }, 10000);
 
-    // Nettoyer l'intervalle lorsque le composant est démonté
     return () => clearInterval(interval);
   }, []);
 
@@ -197,9 +194,9 @@ export default function Page({ params }: { params: { slug: string } }) {
                       <Col span={12}>
                         <Descriptions
                           bordered
-                          column={1} // Affiche les éléments en colonne
+                          column={1}
                           labelStyle={{ fontWeight: "bold" }}
-                          contentStyle={{ whiteSpace: "pre-wrap" }} // Préserve les retours à la ligne
+                          contentStyle={{ whiteSpace: "pre-wrap" }}
                         >
                           {items.map((item) => (
                             <Descriptions.Item
@@ -273,12 +270,11 @@ export default function Page({ params }: { params: { slug: string } }) {
                   </div>
                   <div className="sm:hidden flex flex-col items-center">
                     {" "}
-                    {/* Conteneur principal centré */}
                     <Descriptions
                       bordered
-                      column={1} // Affiche les éléments en colonne
+                      column={1}
                       labelStyle={{ fontWeight: "bold" }}
-                      contentStyle={{ whiteSpace: "pre-wrap" }} // Préserve les retours à la ligne
+                      contentStyle={{ whiteSpace: "pre-wrap" }}
                     >
                       {items.map((item) => (
                         <Descriptions.Item key={item.key} label={item.label}>
@@ -330,9 +326,9 @@ export default function Page({ params }: { params: { slug: string } }) {
                 />
                 <Descriptions
                   bordered
-                  column={1} // Affiche les éléments en colonne
+                  column={1}
                   labelStyle={{ fontWeight: "bold" }}
-                  contentStyle={{ whiteSpace: "pre-wrap" }} // Préserve les retours à la ligne
+                  contentStyle={{ whiteSpace: "pre-wrap" }}
                 >
                   {itemsFinish.map((item) => (
                     <Descriptions.Item key={item.key} label={item.label}>
